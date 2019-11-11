@@ -28,7 +28,7 @@
     let items;
     $http({
       method: "GET",
-      url: "http://davids-restaurant.herokuapp.com/menu_items.json"
+      url: "https://davids-restaurant.herokuapp.com/menu_items.json"
     })
       .then(res => (items = res.data.menu_items))
       .catch(err => err);
