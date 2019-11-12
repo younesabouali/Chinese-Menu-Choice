@@ -8,18 +8,21 @@
     .directive("foundItems", foundItems);
   function foundItems() {
     var ddo = {
-      templateUrl: "found-list.html"
-      //   scope: {
-      //     founditems: "="
-      //   }
-      //   //   controller: foundItemsController,
-      //   //   controllerAs: "element",
-      //   //   bindToController: true
+      templateUrl: "found-list.html",
+      restrict: "E",
+      scope: {
+        foundItems: "=",
+        onRemove: "&"
+      },
+      controller: foundItemsController,
+      controllerAs: "ctrl",
+      bindToController: true
     };
     return ddo;
   }
   function foundItemsController() {
-    var element = this;
+    var ctrl = this;
+    // element.scope = element.myProp;
   }
   Items.$injector = ["$http"];
   searchInput.$injector = ["Items", "$filter"];
@@ -41,14 +44,16 @@
     vm.hello = "Hello world";
 
     vm.consoleData = function() {
-      if (!vm.search) return;
+      if (!vm.search) return (vm.inputempty = true);
       else if (vm.search !== "") {
         const ret = Items.getItems();
         vm.found = $filter("filter")(ret, vm.search);
+        vm.inputempty = false;
         vm.error = false;
         vm.error2 = false;
         if (vm.found.length === 0) {
           vm.error = true;
+          vm.inputempty = false;
         }
       }
     };

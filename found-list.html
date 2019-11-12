@@ -1,2 +1,8 @@
-<li>{{ item.name }}</li>
-<button class="btn btn-danger" ng-click="input.remove($index)">x</button>
+<ul>
+  <div ng-repeat="item in ctrl.foundItems">
+    <li>{{ item.name }}</li>
+    <button class="btn btn-danger" ng-click="ctrl.onRemove({i:$index})">
+      x
+    </button>
+  </div>
+</ul>

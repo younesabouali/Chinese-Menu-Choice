@@ -30,13 +30,19 @@
         </div>
       </div>
       <!-- found-items should be implemented as a component -->
-      <div ng-show="input.search" ng-repeat="item in input.found " class="row">
+      <div ng-show="input.search" class="row">
         <ul>
-          <found-items></found-items>
+          <found-items
+            found-items="input.found"
+            on-remove="input.remove(i)"
+          ></found-items>
         </ul>
       </div>
       <!-- <found-items  on-remove="...."></found-items> -->
     </div>
+    <p class="container alert alert-danger" ng-show="input.inputempty">
+      the input is empty
+    </p>
     <p class="container alert alert-danger" ng-show="input.error">
       No item in the list match the input
     </p>
